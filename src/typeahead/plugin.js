@@ -9,7 +9,7 @@
 
   var old, keys, methods;
 
-  old = $.fn.typeahead;
+  old = $.fn.bstypeahead;
 
   keys = {
     www: 'tt-www',
@@ -185,7 +185,7 @@
     }
   };
 
-  $.fn.typeahead = function(method) {
+  $.fn.bstypeahead = function(method) {
     // methods that should only act on intialized typeaheads
     if (methods[method]) {
       return methods[method].apply(this, [].slice.call(arguments, 1));
@@ -196,8 +196,8 @@
     }
   };
 
-  $.fn.typeahead.noConflict = function noConflict() {
-    $.fn.typeahead = old;
+  $.fn.bstypeahead.noConflict = function noConflict() {
+    $.fn.bstypeahead = old;
     return this;
   };
 

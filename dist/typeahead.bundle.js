@@ -1,7 +1,8 @@
 /*!
  * typeahead.js 0.11.1
- * https://github.com/twitter/typeahead.js
- * Copyright 2013-2015 Twitter, Inc. and other contributors; Licensed MIT
+ * https://github.com/patril/typeahead.js
+ * Forked from original twitter typeahead
+ * Copyright 2013-2019 Twitter, Inc. and other contributors; Licensed MIT
  */
 
 (function(root, factory) {
@@ -9,10 +10,10 @@
         define("bloodhound", [ "jquery" ], function(a0) {
             return root["Bloodhound"] = factory(a0);
         });
-    } else if (typeof exports === "object") {
+    } else if (typeof module === "object" && module.exports) {
         module.exports = factory(require("jquery"));
     } else {
-        root["Bloodhound"] = factory(jQuery);
+        root["Bloodhound"] = factory(root["jQuery"]);
     }
 })(this, function($) {
     var _ = function() {
@@ -922,10 +923,10 @@
         define("typeahead.js", [ "jquery" ], function(a0) {
             return factory(a0);
         });
-    } else if (typeof exports === "object") {
+    } else if (typeof module === "object" && module.exports) {
         module.exports = factory(require("jquery"));
     } else {
-        factory(jQuery);
+        factory(root["jQuery"]);
     }
 })(this, function($) {
     var _ = function() {
@@ -2221,7 +2222,7 @@
     (function() {
         "use strict";
         var old, keys, methods;
-        old = $.fn.typeahead;
+        old = $.fn.bstypeahead;
         keys = {
             www: "tt-www",
             attrs: "tt-attrs",
@@ -2376,15 +2377,15 @@
                 return this;
             }
         };
-        $.fn.typeahead = function(method) {
+        $.fn.bstypeahead = function(method) {
             if (methods[method]) {
                 return methods[method].apply(this, [].slice.call(arguments, 1));
             } else {
                 return methods.initialize.apply(this, arguments);
             }
         };
-        $.fn.typeahead.noConflict = function noConflict() {
-            $.fn.typeahead = old;
+        $.fn.bstypeahead.noConflict = function noConflict() {
+            $.fn.bstypeahead = old;
             return this;
         };
         function ttEach($els, fn) {

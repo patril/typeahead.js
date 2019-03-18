@@ -40,7 +40,8 @@ module.exports = function(grunt) {
     banner: [
       '/*!',
       ' * typeahead.js <%= version %>',
-      ' * https://github.com/twitter/typeahead.js',
+      ' * https://github.com/patril/typeahead.js',
+	  ' * Forked from original twitter typeahead',
       ' * Copyright 2013-<%= grunt.template.today("yyyy") %> Twitter, Inc. and other contributors; Licensed MIT',
       ' */\n\n'
     ].join('\n'),

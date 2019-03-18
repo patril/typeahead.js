@@ -2,7 +2,7 @@
     "name": "twitter/typeahead.js",
     "description": "fast and fully-featured autocomplete library",
     "keywords": ["typeahead", "autocomplete"],
-    "homepage": "http://twitter.github.com/typeahead.js",
+    "homepage": "http://github.com/patril/typeahead.js",
     "authors": [
         {
             "name": "Twitter Inc.",
