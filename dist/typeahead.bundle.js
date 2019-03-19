@@ -2456,6 +2456,22 @@
                     o.onSelect(event, suggestion);
                 });
             }
+            if (o.searchOnOpen) {
+                $input.on(eventBus.namespace + "active", function() {
+                    setTimeout(function() {
+                        $input.trigger("input");
+                    }, 0);
+                });
+            }
+            if (o.autoSave) {
+                $input.on(eventBus.namespace + "select", function() {
+                    if ($input.editable) {
+                        setTimeout(function() {
+                            $input.editable("toggle");
+                        }, 0);
+                    }
+                });
+            }
             if (o.forceSelection) {
                 var options = [];
                 var evts = {};
