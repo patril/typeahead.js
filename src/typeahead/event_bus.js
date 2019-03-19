@@ -52,7 +52,8 @@ var EventBus = (function() {
     },
 
     // ### public
-
+	namespace: namespace,
+	
     before: function(type) {
       var args, $e;
 

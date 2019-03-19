@@ -84,6 +84,8 @@
 
         $input.data(keys.www, www);
         $input.data(keys.typeahead, typeahead);
+		
+		setupCustomEvents(o, $input, eventBus, typeahead);
       }
     },
 
@@ -288,4 +290,53 @@
 
     return $el.length ? $el : null;
   }
+  
+	var setupCustomEvents = function(o, $input, eventBus, typeahead) {
+
+		if (_.isFunction(o.onSelect)) {
+			$input.on(eventBus.namespace + 'select', function (event, suggestion) {
+				o.onSelect(event, suggestion);
+			});
+		}
+		if (o.forceSelection) {
+			
+			var options = [];
+			
+			var evts = {};
+			evts[eventBus.namespace + 'change'] = function(event, text) {
+				var value = null, opt;
+
+				for (var i = 0; i < options.length; i++) {
+					opt = options[i];
+					if (opt === text || (_.isObject(opt) && opt.hasOwnProperty('Decode') && opt.hasOwnProperty('Code') && opt.Decode === text) || (_.isObject(opt) && opt.hasOwnProperty('Text') && opt.hasOwnProperty('Value') && opt.Text === text)) {
+						if (opt === text) {
+							value = text;
+						}
+						if ((_.isObject(opt) && opt.hasOwnProperty('Decode') && opt.hasOwnProperty('Code') && opt.Decode === text)) {
+							value = opt.Code;
+						}
+						if ((_.isObject(opt) && opt.hasOwnProperty('Text') && opt.hasOwnProperty('Value') && opt.Text === text)) {
+							value = opt.Value;
+						}
+						break;
+					}
+				}
+				
+				if (value === null) {
+					typeahead.setVal(null);
+					if (_.isFunction(o.onSelect)) {
+						o.onSelect(null);
+					}
+				}
+			};
+			evts[eventBus.namespace + 'render'] = function() {
+				if (arguments.length > 1) {
+					options = Array.prototype.slice.call(arguments);
+					options = options.slice(1);
+				}
+			};
+			
+			$input.on(evts);
+		}		
+	};  
 })();
